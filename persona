@@ -1,0 +1,32 @@
+class Persona {
+    // Atributos
+    String nombre;
+    int edad;
+
+    // Constructor
+    public Persona(String nombre, int edad) {
+        this.nombre = nombre;
+        this.edad = edad;
+    }
+
+    // Método para mostrar información
+    public void mostrar() {
+        System.out.println("El nombre de la persona es: " + nombre);
+        System.out.println("La edad de la persona es: " + edad);
+    }
+
+    // Método para simular que la persona corre
+    public void correr() {
+        System.out.println("Soy " + nombre + " y tengo " + edad + " y he corrido mucho");
+    }
+
+    // Método principal para ejecutar el programa
+    public static void main(String[] args) {
+        // Crear el objeto "Paulo"
+        Persona paulo = new Persona("Paulo", 21);
+
+        // Llamar a los métodos
+        paulo.correr();
+        paulo.mostrar();
+    }
+}
