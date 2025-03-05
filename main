@@ -1,0 +1,86 @@
+import java.util.Scanner;
+
+class Cuenta {
+    private final String titular;
+    private double total = 5000;
+
+    public Cuenta(String titular) {
+        this.titular = titular;
+    }
+
+    public String getTitular() {
+        return titular;
+    }
+
+    public double getTotal() {
+        return total;
+    }
+
+    public void ingresar(double cantidad) {
+        if (cantidad > 0) {
+            total += cantidad;
+        } else {
+            System.out.println("No se puede ingresar una cantidad negativa.");
+        }
+    }
+
+    public void retirar(double cantidad) {
+        if (cantidad > 0) {
+            if (total - cantidad < 0) {
+                total = 0;
+            } else {
+                total -= cantidad;
+            }
+        } else {
+            System.out.println("No se puede retirar una cantidad negativa.");
+        }
+    }
+
+    public void mostrarInformacion() {
+        System.out.println("\nTitular: " + titular);
+        System.out.println("Saldo actual: $" + total);
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        try (Scanner scanner = new Scanner(System.in)) {
+            System.out.print("Ingrese el nombre del titular: ");
+            String nombreTitular = scanner.nextLine();
+            
+            Cuenta cuentaUsuario = new Cuenta(nombreTitular);
+            
+            int opcion;
+            do {
+                System.out.println("\nMenú de opciones:");
+                System.out.println("1. Ingresar dinero");
+                System.out.println("2. Retirar dinero");
+                System.out.println("3. Mostrar saldo");
+                System.out.println("4. Salir");
+                System.out.print("Seleccione una opción: ");
+                opcion = scanner.nextInt();
+                
+                switch (opcion) {
+                    case 1:
+                        System.out.print("Ingrese la cantidad a depositar: ");
+                        double cantidadIngresar = scanner.nextDouble();
+                        cuentaUsuario.ingresar(cantidadIngresar);
+                        break;
+                    case 2:
+                        System.out.print("Ingrese la cantidad a retirar: ");
+                        double cantidadRetirar = scanner.nextDouble();
+                        cuentaUsuario.retirar(cantidadRetirar);
+                        break;
+                    case 3:
+                        cuentaUsuario.mostrarInformacion();
+                        break;
+                    case 4:
+                        System.out.println("Gracias por usar el sistema.");
+                        break;
+                    default:
+                        System.out.println("Opción no válida, intente de nuevo.");
+                }
+            } while (opcion != 4);
+        }
+    }
+}
